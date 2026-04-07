@@ -1,8 +1,5 @@
-Here’s a **ready-to-use `README.md`** for your live session. It is structured, reproducible, and aligned with your Codex + MCP + Obsidian workflow.
 
----
-
-# 📄 README.md — Live Session: Codebase Onboarding with Codex + MCP
+# Live Session: Codebase Onboarding with Codex + MCP
 
 ---
 
