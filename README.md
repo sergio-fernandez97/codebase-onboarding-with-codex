@@ -1,8 +1,6 @@
 
 # Live Session: Codebase Onboarding with Codex + MCP
 
----
-
 # 🎯 Objective
 
 ## Goal of the Live Session
@@ -33,8 +31,6 @@ By the end of the session, you will have:
 ---
 
 # ⚙️ Prerequisites
-
----
 
 ## 1. System Requirements
 
@@ -77,7 +73,26 @@ Inside Obsidian:
 2. Install:
 
 * ✅ **Obsidian Local REST API plugin**
+1. Launch Obsidian & Open your Vault (or create one).
+2. Click ⚙️ (bottom-left corner) **OR** Press:
+```bash
+Cmd + ,   (Mac)
+Ctrl + ,  (Windows/Linux)
+```
+3. Go to **Community plugins**
+4. Click **Browse** and in the search bar, type:
+```bash
+Local REST API
+```
+5. Find it (by coddingtonbear). Click **Install**. Then click **Enable**.
+6. Open the Plugin Settings and Click **Local REST API**.
+7. Copy into .env:
+  * API Key -> `OBSIDIAN_API_KEY`
+  * Host + Port (default usually: `127.0.0.1:27124`) -> `HOST` and `PORT`
 
+  👉 You will need this for MCP config
+
+8. Enable Non-encrypted (HTTP) Server.
 ---
 
 ## 6. Configure Obsidian MCP Server (Docker MCP Toolkit)
@@ -98,8 +113,15 @@ You will use:
 👉 This server allows AI agents to interact with your vault programmatically ([Awesome MCP Servers][2])
 
 ---
+## 7. Add MCP Server 
+### 7.1 [RECOMMENDED] Add MCP Server through Docker MCP Toolkit
+After adding the MCP server. Use the following command for listing the current mcp servers added.
+```bash
+docker mcp server ls
+```
+Verify you se `obsidian`.
 
-## 7. Add MCP Server Configuration
+### 7.2 [OPTIONAL] Add MCP Server Configuration
 
 In your MCP client config:
 
@@ -136,6 +158,9 @@ In your MCP client config:
 ---
 
 # 🔹 PART 1 — Start Codex
+```bash
+cd ..
+```
 
 ```bash
 codex
@@ -148,7 +173,13 @@ codex
 ### Step 1 — Explain the repo
 
 ```text
-/explain-repo
+› Explain the repository ./Python:
+  - What it does
+  - Structure
+  - Key modules
+  - Where to start 
+
+-> save your findings into ./steps/STEP_1.md
 ```
 
 ---
@@ -176,7 +207,7 @@ Where should a beginner start in this repository?
 ### Step 4 — Select a module
 
 ```text
-Show me a simple sorting algorithm from this repo
+Show me a simple sorting algorithm from this repo (./Python)
 ```
 
 ---
@@ -184,7 +215,7 @@ Show me a simple sorting algorithm from this repo
 ### Step 5 — Explain the code
 
 ```text
-Explain this step by step
+Explain the algorithm step by step
 ```
 
 ---
@@ -201,6 +232,10 @@ What is the time complexity?
 
 ```text
 How can this be improved?
+```
+
+````
+save all your findings surronding this algorithm at ./steps/PART_4.ms
 ```
 
 ---
@@ -235,7 +270,7 @@ Test this with:
 ### Step 10 — Create structured document
 
 ```text
-Create a structured onboarding document including:
+Create a structured onboarding document (named ONBOARDING.md) explaining the repo ./Python/ including:
 - Overview
 - Folder structure
 - Key modules
