@@ -113,15 +113,20 @@ You will use:
 👉 This server allows AI agents to interact with your vault programmatically ([Awesome MCP Servers][2])
 
 ---
-## 7. Add MCP Server 
-### 7.1 [RECOMMENDED] Add MCP Server through Docker MCP Toolkit
-After adding the MCP server. Use the following command for listing the current mcp servers added.
+## 7. Add MCP Server through Docker MCP Toolkit
+1. Go to docker `MCP Toolkit > Clients`. Look up `Codex` and press connect **OR** use the following command.
+```bash
+docker mcp client connect codex
+```
+2. Then go to `MCP Toolkit > My servers`. Search for the server `Obsidian` and press `Add`.
+
+3. After adding the MCP server. Use the following command for listing the current mcp servers added.
 ```bash
 docker mcp server ls
 ```
-Verify you se `obsidian`.
+Verify you se `obsidian`. 
 
-### 7.2 [OPTIONAL] Add MCP Server Configuration
+**OR** Add MCP Server Configuration
 
 In your MCP client config:
 
@@ -153,6 +158,19 @@ In your MCP client config:
 
 ---
 
+# ⚙️ Agent Configuration
+
+Before starting the live exercise, configure how Codex should behave for this repository.
+
+Codex supports configuration in a `.codex` directory, and this can be set up in two ways:
+
+* Project-level: `./.codex/`
+* Global-level: `~/.codex/`
+
+For this workshop, prefer a project-level `./.codex/` setup so the repository contains its own agent instructions, skills, and MCP-related configuration. Then add an `AGENTS.md` file at the repository root to define how the agent should work in this specific codebase.
+
+---
+
 # 🚀 Step-by-Step Live Session
 
 ---
@@ -164,6 +182,11 @@ cd ..
 
 ```bash
 codex
+```
+Create a [`AGENTS.md`](https://agents.md) file through the following prompt inside codex
+```
+Create a brief AGENTS.md file, I want the agent to analyze the repository ./Python for in order to create onboarding documentation. 
+Every requested finding must be saved at ./findings in markdown format with a meaningful name. Whenever the user refers to a repo it means ./Python if he's not refering explicitly to another one. 
 ```
 
 ---
@@ -178,8 +201,6 @@ codex
   - Structure
   - Key modules
   - Where to start 
-
--> save your findings into ./steps/STEP_1.md
 ```
 
 ---
@@ -234,43 +255,18 @@ What is the time complexity?
 How can this be improved?
 ```
 
-````
-save all your findings surronding this algorithm at ./steps/PART_4.ms
-```
+---
 
 ---
 
-# 🔹 PART 4 — Execute with Docker MCP Toolkit
+# 🔹 PART 4 — Generate Knowledge Artifact
 
 ---
 
-### Step 8 — Run code safely
+### Step 8 — Create structured document
 
 ```text
-Run this function using sample input
-```
-
----
-
-### Step 9 — Test edge cases
-
-```text
-Test this with:
-- empty list
-- sorted list
-- reversed list
-```
-
----
-
-# 🔹 PART 5 — Generate Knowledge Artifact
-
----
-
-### Step 10 — Create structured document
-
-```text
-Create a structured onboarding document (named ONBOARDING.md) explaining the repo ./Python/ including:
+Create a structured onboarding document (named ONBOARDING.md) explaining this repo including:
 - Overview
 - Folder structure
 - Key modules
@@ -280,7 +276,7 @@ Create a structured onboarding document (named ONBOARDING.md) explaining the rep
 
 ---
 
-### Step 11 — Add diagram
+### Step 9 — Add diagram
 
 ```text
 Add a Mermaid diagram showing repo structure
@@ -299,7 +295,7 @@ Add:
 
 ---
 
-# 🔹 PART 6 — Publish with MCP (🔥 KEY STEP)
+# 🔹 PART 5 — Publish with MCP (🔥 KEY STEP)
 
 ---
 
@@ -325,11 +321,52 @@ Content: (generated document)
 
 ---
 
-# 🔹 PART 7 — (OPTIONAL) Use Skill
+# 🔹 PART 6 — Use Skill
+This is brief overview of skills for OpenAI Codex.
+
+>
+Use agent skills to extend Codex with task-specific capabilities. A skill packages instructions, resources, and optional scripts so Codex can follow a workflow reliably. You can share skills across teams or with the community. — Open AI
+>
+
+
+Read the [documentation](https://developers.openai.com/codex/skills/) for further information.
+
+* Other sources: [YouTube](https://www.youtube.com/watch?v=en0It1zBjpw).
+
+### QuickStart 
+1. Execute `codex` and then press the command `\skills`.
+2. List the available skills
+```
+Skill Creator -> $skill-creator
+Skill Installer -> $skill-installer
+```
 
 ---
 
-### Define skill: `repo-onboarding-publisher`
+### Step 14 — Use the native skill to create a new skill
+
+Inside Codex, use the built-in skill creation flow to generate a reusable skill:
+
+```text
+Use the native skill-creator skill to create a new skill named repo-onboarding-publisher.
+
+The skill must:
+- Analyze the repository
+- Summarize the structure
+- Select one beginner-friendly example
+- Explain the example step by step
+- Generate a Mermaid diagram
+- Create an onboarding document in markdown
+- Publish the onboarding document to Obsidian via MCP
+
+Assume that when I mention "the repo" I mean ./Python.
+```
+
+---
+
+### Step 15 — Review the generated skill
+
+Make sure the generated skill clearly captures the workflow and expected output:
 
 ```yaml
 name: repo-onboarding-publisher
@@ -346,11 +383,44 @@ steps:
 
 ---
 
-### Execute:
+### Step 16 — Refine the skill behavior
+
+Ask Codex to improve the generated skill so it is specific and reusable:
+
+```text
+Refine the repo-onboarding-publisher skill so it always:
+- Reads the repo from ./Python unless another path is provided
+- Produces a markdown onboarding document
+- Includes overview, structure, key modules, beginner starting point, example explanation, learning path, and Mermaid diagram
+- Publishes the final document into Obsidian
+```
+
+---
+
+### Step 17 — Use the new skill
+
+Execute the skill directly:
 
 ```text
 Use repo-onboarding-publisher skill
 ```
+
+---
+
+### Step 18 — Verify the published result
+
+Confirm that the skill completed the full workflow:
+
+```text
+Verify that the onboarding document was published in Obsidian and tell me the final file path.
+```
+
+### Step 19 - Install an external skill 
+
+1. Install the skill [$agent-skill-evaluator](https://github.com/JeredBlu/eval-marketplace/tree/main)
+2. Evalute the skill `$repo-onboarding-publisher` with `$agent-skill-evaluator`.
+
+### Step 20 - Test our skill with a different repo
 
 ---
 
@@ -398,18 +468,37 @@ This workflow enables:
 
 ---
 
+# 📘 Weekly Practical Assignment
+
+## Objective
+
+Build your own `repo-onboarding-publisher` skill using the native skill flow in Codex (AI-generated is recommended), then use it with a different repository to produce and publish a new onboarding document.
+
+---
+
+## Instructions
+
+1. Choose a repository different from `./Python`.
+2. Create or configure your local `.codex` setup for that repository.
+3. Add an `AGENTS.md` file that defines how the agent should work with that repo.
+4. Use the native skill creation flow to build your own `repo-onboarding-publisher` skill.
+5. Run the skill against the new repository.
+6. Publish the resulting onboarding document to Obsidian.
+
+---
+
+## Deliverables
+
+* A GitHub repository containing the `.codex` configuration
+* An `AGENTS.md` file
+* A screenshot proving that the onboarding document was published in Obsidian
+
+---
+
 ## 🧠 Final Thought
 
 > Codex is not just an assistant.
 > It is a **knowledge generator connected to your system**.
-
----
-
-# 🚀 Next Steps
-
-* Add GitHub Actions for auto-documentation
-* Extend to multiple repos
-* Build a shared knowledge base for your team
 
 ---
 
