@@ -479,7 +479,7 @@ Build your own `repo-onboarding-publisher` skill using the native skill flow in 
 ## Instructions
 
 1. Choose a repository different from `./Python`.
-2. Create or configure your local `.codex` setup for that repository.
+2. Configure and add Obsidian MCP server for codex (review the README.md file from the live session).
 3. Add an `AGENTS.md` file that defines how the agent should work with that repo.
 4. Use the native skill creation flow to build your own `repo-onboarding-publisher` skill.
 5. Run the skill against the new repository.
@@ -489,9 +489,8 @@ Build your own `repo-onboarding-publisher` skill using the native skill flow in 
 
 ## Deliverables
 
-* A GitHub repository containing the `.codex` configuration
-* An `AGENTS.md` file
-* A screenshot proving that the onboarding document was published in Obsidian
+* A GitHub repository containing the `.codex` configuration, the `AGENTS.md` file, and the `README.md` file cleary stating which repository was used and mentioning how to used the custom skill. 
+* A screenshot proving that the onboarding document was published in Obsidian.
 
 ---
 
